@@ -1,5 +1,5 @@
 # hacktoberfest2021_CP
-You can contribute competitive programming algorithms in different programming languages.
+You can contribute competitive programming in c++
 
 ## Basics of Git and GitHub
 ### Git & GitHub
