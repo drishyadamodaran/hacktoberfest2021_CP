@@ -14,211 +14,202 @@ class Job
 
 {
 
-public :
-char id[5]; 
- int deadline;
- int Profit;
+    public:
+        char id[5];
+    int deadline;
+    int Profit;
 
 };
 
-void jobSequencing(Job jobs[],int n);
+void jobSequencing(Job jobs[], int n);
 
-int minvalue(int x,int y)
-
-{
-
-if(x<y)
-
-return x;
-
-return y;
-
-}
-
-int main (void)
+int minvalue(int x, int y)
 
 {
 
-int i ,j ,n;
+    if (x < y)
 
+        return x;
 
+    return y;
 
-Job jobs[5];
+}
 
-cout<<"\Enter the number of jobs:";
-
-cin>>n;
-
-for(i=0;i<n;i++)
+int main(void)
 
 {
 
-cout<<"\nEnter the job:";
+    int i, j, n;
 
-cin>>jobs[i].id;
+    Job jobs[5];
 
-cout<< "\nEnter the Profit:";
+    cout << "\Enter the number of jobs:";
 
-cin>>jobs[i].Profit;
+    cin >> n;
 
-cout<<"\nEnter deadline:";
+    for (i = 0; i < n; i++)
 
-cin>>jobs[i].deadline;
+    {
 
+        cout << "\nEnter the job:";
 
+        cin >> jobs[i].id;
+
+        cout << "\nEnter the Profit:";
+
+        cin >> jobs[i].Profit;
+
+        cout << "\nEnter deadline:";
+
+        cin >> jobs[i].deadline;
+
+    }
+
+    Job temp;
+
+    cout << "\nJob(i)\t\t Profit\t\t Deadline\t \n\n";
+
+    cout << "--------------------------------------------------";
+
+    for (i = 0; i < n; i++)
+
+    {
+
+        cout << "\n\n";
+
+        cout << jobs[i].id << "\t\t" << jobs[i].Profit << "\t\t" << jobs[i].deadline;
+
+    }
+
+    for (i = 1; i < n; i++)
+
+    {
+
+        for (j = 0; j < n - i; j++)
+
+        {
+
+            if (jobs[j + 1].Profit > jobs[j].Profit)
+
+            {
+
+                temp = jobs[j + 1];
+
+                jobs[j + 1] = jobs[j]; // descending order
+
+                jobs[j] = temp;
+
+            }
+
+        }
+
+    }
+
+    cout << "\n\nTotal nuber of jobs:" << n << endl;
+
+    jobSequencing(jobs, n);
+
+    getch();
+
+    return 0;
 
 }
 
-Job temp;
-
-cout<<"\nJob(i)\t\t Profit\t\t Deadline\t \n\n";
-
-cout<<"--------------------------------------------------";
-
-for(i=0;i<n;i++)
+void jobSequencing(Job jobs[], int n)
 
 {
 
-cout<<"\n\n";
+    int i, j, k, maxprofit;
 
-cout<<jobs[i].id<<"\t\t"<<jobs[i].Profit<<"\t\t"<<jobs[i].deadline;
+    int timeslot[MAX];
 
-}
+    int filledTimeSlot = 0;
 
-for(i=1;i<n;i++)
+    int dmax = 0;
 
-{
+    for (i = 0; i < n; i++)
 
-for(j=0;j<n-i;j++)
+    {
 
-{
+        if (jobs[i].deadline > dmax)
 
-if(jobs[j+1].Profit>jobs[j].Profit)
+        {
 
-{
+            dmax = jobs[i].deadline;
 
-temp=jobs[j+1];  
+        }
+    }
 
-jobs[j+1]=jobs[j];// descending order
 
-jobs[j]=temp;
 
-}
+    cout << "\nTotal time slot: " << dmax << endl;
 
-}
+    for (i = 1; i <= dmax; i++)
 
-}
+    {
 
-cout<<"\n\nTotal nuber of jobs:"<<n<<endl;
+        timeslot[i] = -1;
 
-jobSequencing(jobs,n);
+    }
 
-getch();
+    cout << "\n\nnumber of jobs done: " << dmax << endl;
 
-return 0;
+    for (i = 1; i <= n; i++)
 
-}
+    {
 
-void jobSequencing(Job jobs[],int n)
+        k = minvalue(dmax, jobs[i - 1].deadline);
 
-{
+        while (k >= 1)
 
-int i,j,k,maxprofit;
+        {
 
-int timeslot[MAX];
+            if (timeslot[k] == -1)
 
-int filledTimeSlot= 0;
+            {
 
-int dmax= 0;
+                timeslot[k] = i - 1;
 
-for (i= 0;i<n;i++) 
+                filledTimeSlot++;
 
-{
+                break;
 
-if(jobs[i].deadline>dmax)
+            }
 
-{
+            k--;
 
-dmax =jobs[i].deadline;
+        }
 
-}
+        if (filledTimeSlot == dmax)
 
+        {
 
+            break;
 
+        }
 
+    }
 
-}
+    // cout<<"\nJobs done \:n";
 
+    for (i = 1; i <= dmax; i++)
 
+    {
 
-cout<<"\nTotal time slot: "<<dmax<<endl;
+        cout << "\tJob" << jobs[timeslot[i]].id << " at time:" << i << endl; // at particular time slot
 
-for(i=1;i<=dmax;i++) 
+    }
 
-{
+    maxprofit = 0;
 
-timeslot[i]=-1;
+    for (i = 1; i <= dmax; i++)
 
-}
+    {
 
-cout<<"\n\nnumber of jobs done: "<<dmax<<endl; 
+        maxprofit += jobs[timeslot[i]].Profit;
 
-for(i=1;i<=n;i++)
+    }
 
-{
-
-k=minvalue(dmax,jobs[i-1].deadline);
-
-while(k>=1) 
-
-{
-
-if(timeslot[k]==-1)
-
-{
-
-timeslot[k]=i-1;
-
-filledTimeSlot++;
-
-break;
-
-}
-
-k--;
-
-}
-
-if(filledTimeSlot==dmax)
-
-{ 
-
- break;
-
-}
-
-}
-
-// cout<<"\nJobs done \:n";
-
-for(i=1;i<=dmax;i++)
-
-{
-
-cout<<"\tJob"<<jobs[timeslot[i]].id<<" at time:"<<i<<endl;// at particular time slot
-
-}
-
-maxprofit=0;
-
-for(i=1;i<=dmax;i++)
-
-{
-
-maxprofit+=jobs[timeslot[i]].Profit;
-
-}
-
-    cout<<"\ntotal profit: "<<maxprofit;
+    cout << "\ntotal profit: " << maxprofit;
 
 }
