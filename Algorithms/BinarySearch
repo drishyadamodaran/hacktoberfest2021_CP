@@ -1,0 +1,45 @@
+//srishti1302
+#include <stdio.h>
+#define COMPARE(x,y) ( (x)<(y)?-1:(x)==(y)? 0 :1 )
+int binsearch(int a[20],int k,int left,int right)
+{
+
+    if(left<right)
+    {
+        int middle=(left+right)/2;
+        switch(COMPARE(a[middle],k))
+        {
+            case -1: return binsearch(a,k,middle+1,right);
+                     break;
+
+            case 0: return middle;
+                    break;
+
+            case 1: return binsearch(a,k,left,middle-1);
+                    break;
+        }
+    }
+    return -1;
+}
+int main()
+{
+    int n,a[20],k,res;
+    printf("Enter size of the array: ");
+    scanf("%d",&n);
+    printf("\nEnter the array elements:\n");
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    printf("\nEnter the number to be searched:\n");
+    scanf("%d",&k);
+
+    res=binsearch(a,k,0,n-1);
+    if(res==-1)
+        printf("Element not found!!");
+    else
+        printf("\nThe number %d is found at positon %d in the given list",k,res+1);
+
+    return 0;
+}
+
+
+
