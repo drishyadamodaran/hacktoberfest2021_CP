@@ -1,8 +1,6 @@
 //
-
 #include <iostream>
 using namespace std;
-
 void printSubsetsOfArray(int input[], int size,int output[],int len) {
 	if(size==0){
       for(int i=0;i<len;i++){
