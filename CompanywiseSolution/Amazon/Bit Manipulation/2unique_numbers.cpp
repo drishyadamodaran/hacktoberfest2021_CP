@@ -1,3 +1,23 @@
+// Problem Statement - Given an array in which all numbers except two are repeated once. 
+// (i.e. we have 2n+2 numbers and n numbers are occurring twice and remaining two have occurred once). Find those two numbers in the most efficient way.  
+
+/* Examples - 
+Input: = 2
+arr[] = {1, 2, 3, 2, 1, 4}
+Output:
+3 4 
+Explanation:
+3 and 4 occur exactly once. 
+
+Input:
+N = 1
+arr[] = {2, 1, 3, 2}
+Output:
+1 3
+Explanation:
+1 3 occur exactly once.
+*/
+
 #include <bits/stdc++.h>
 using namespace std; 
 
