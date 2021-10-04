@@ -1,0 +1,28 @@
+Search a number in a sorted rotated array. Basically an array is given 
+and its is rotated or pivoted from a certain index . Basically we have ro
+tell that an element is present or not in that array
+
+sample input
+input line 1- enter the number of elements
+input line 2-enter the key needed to find
+input line 3- enter all the elements to this
+
+
+output line 1-basically print the index of the element if present
+else print a -1 if not present
+
+example1-
+input
+9 
+10
+5 6 7 8 9 10 1 2 3
+
+output-5
+
+example-2
+9 
+15
+5 6 7 8 9 10 1 2 3
+
+output- (-1)
+
