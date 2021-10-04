@@ -1,0 +1,57 @@
+Question: Assume that the value of a = 1, b = 2, c = 3, ... , z = 26. 
+You are given a numeric string S. Write a program to print the list of all possible codes that can be generated from the given string.
+
+Solution:
+
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+char itoc(int i){   //int to char
+    char c = 'a'+i-1;
+    return c;
+}
+int ctoi(char a){  //char to int
+    int i = a - '0';
+    return i;
+}
+
+void helper(string input,string output){
+    if(input.length()==0){
+        cout<<output<<endl;
+        return;
+    }
+
+    char c = itoc(ctoi(input[0]));
+    //output = output+c;
+    helper(input.substr(1),output+c);
+
+    //print(output);
+
+    if(input.length()>1){
+
+        if(ctoi(input[0])*10+ctoi(input[1])>=10 &&ctoi(input[0])*10+ctoi(input[1])<=26){
+                char c2 = itoc(ctoi(input[0])*10+ctoi(input[1]));
+				//output = output+c2;
+                helper(input.substr(2),output+c2);
+				//print(output);
+        }
+    }
+
+}
+void printAllPossibleCodes(string input) {
+    /*
+    Given the input as a string, print all its possible combinations. You do not need to return anything.
+    */
+    string output;
+    helper(input,output);
+}
+
+int main(){
+    string input;
+    cin >> input;
+
+    printAllPossibleCodes(input);
+    return 0;
+}
