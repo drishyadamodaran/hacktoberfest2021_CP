@@ -1,3 +1,5 @@
+/* Problem Statement - Given two numbers ‘a’ and b’. Write a program to count number of bits needed to be flipped to convert ‘a’ to ‘b’. */
+
 #include <bits/stdc++.h>
 using namespace std;
 
